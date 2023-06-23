@@ -319,7 +319,7 @@ const Stage = ({
         break;
       default:
         break;
-        // return null;
+      // return null;
     }
   };
 
@@ -608,148 +608,57 @@ const Stage = ({
 
   return (
     <>
-      {isStandalone ? (
-        <>
-          {image && (
-            <div
-              className="relative md:w-full md:h-auto"
-              ref={containerRef}
-              style={
-                window.innerWidth < 768
-                  ? { height: "calc(100vh/2" }
-                  : { height: canvasHeight }
-              }
-            >
-              <Canvas
-                konvaRef={konvaRef}
-                annotations={annotations}
-                newAnnotation={newAnnotation}
-                scale={scale}
-                handleMouseUp={handleMouseUp}
-                handleMouseDown={handleMouseDown}
-                handleMouseMove={handleMouseMove}
-                handleMouseOut={handleMouseOut}
-                containerRef={containerRef}
-                hasClicked={hasClicked}
-                setCanvasScale={setCanvasScale}
-                isStandalone={isStandalone}
-                isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
-                allText={[allText, setAllText]}
-              />
-              <div
-                className={`absolute top-0 right-0 bottom-0 left-0 bg-opacity-70 bg-black flex items-center justify-center text-white text-lg font-bold transition-opacity ${
-                  shouldShowHomepageOverlay
-                    ? "opacity-100"
-                    : "opacity-0 pointer-events-none"
-                }`}
-                id="canvas-overlay"
-              >
-                <FeatureSummary
-                  actions={[{ action: "Demo", actionUrl: "/demo" }]}
-                  darkMode
-                  centerAlign
-                >
-                  <h3>Want to keep going?</h3>
-                </FeatureSummary>
-              </div>
-            </div>
-          )}
-        </>
-      ) : (
-        <>
-          {image || isToolBarUpload ? (
-            <div className="flex items-stretch justify-center flex-1 overflow-hidden stage">
-              {showLoadingModal ? (
-                <LoadingModal handleResetState={handleResetState} />
-              ) : (
-                <PointsModal />
-              )}
-              <SegmentDrawer
-                handleResetState={handleResetState}
-                handleResetInteraction={handleResetInteraction}
-                handleUndoInteraction={handleUndoInteraction}
-                handleRedoInteraction={handleRedoInteraction}
-                handleMagicErase={handleMagicErase}
-                handleCreateSticker={handleCreateSticker}
-                handleImage={handleImage}
-                userNegClickBool={[userNegClickBool, setUserNegClickBool]}
-                handleMultiMaskMode={handleMultiMaskMode}
-                showGallery={[showGallery, setShowGallery]}
-                hasClicked={hasClicked}
-                handleSelectedImage={handleSelectedImage}
-              />
-              <div className="relative flex flex-col items-center justify-center flex-1 overflow-hidden md:overflow-visible md:px-12 md:py-9">
-                <div className="absolute top-0 z-30 flex flex-col items-center justify-center w-full md:relative">
-                  <MobileOptionNavBar
-                    handleResetInteraction={handleResetInteraction}
-                    handleUndoInteraction={handleUndoInteraction}
-                    handleRedoInteraction={handleRedoInteraction}
-                    handleResetState={handleResetState}
-                    handleImage={handleImage}
-                    userNegClickBool={[userNegClickBool, setUserNegClickBool]}
-                  />
-                  <ToolTip
-                    isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
-                    hasClicked={hasClicked}
-                    annotations={annotations}
-                    allText={[allText, setAllText]}
-                  />
-                </div>
-                <div
-                  className="relative flex-1 w-full mb-3 md:my-7"
-                  ref={containerRef}
-                >
-                  <Profiler
-                    id="Canvas"
-                    onRender={(
-                      id, // the "id" prop of the Profiler tree that has just committed
-                      phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-                      actualDuration, // time spent rendering the committed update
-                      baseDuration, // estimated time to render the entire subtree without memoization
-                      startTime, // when React began rendering this update
-                      commitTime, // when React committed this update
-                      interactions
-                    ) => {
-                      // console.log(`${id} took ${actualDuration}ms`);
-                    }}
-                  >
-                    <Canvas
-                      konvaRef={konvaRef}
-                      annotations={annotations}
-                      newAnnotation={newAnnotation}
-                      scale={scale}
-                      handleMouseUp={handleMouseUp}
-                      handleMouseDown={handleMouseDown}
-                      handleMouseMove={handleMouseMove}
-                      handleMouseOut={handleMouseOut}
-                      containerRef={containerRef}
-                      hasClicked={hasClicked}
-                      setCanvasScale={setCanvasScale}
-                      isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
-                      allText={[allText, setAllText]}
-                    />
-                  </Profiler>
-                </div>
-                <MobileSegmentDrawer
-                  handleResetInteraction={handleResetInteraction}
-                  handleMagicErase={handleMagicErase}
-                  handleCreateSticker={handleCreateSticker}
-                  userNegClickBool={[userNegClickBool, setUserNegClickBool]}
-                />
-              </div>
-            </div>
-          ) : !isToolBarUpload ? (
-            <div className="flex items-stretch justify-center flex-1 overflow-hidden stage">
-              <ImagePicker
-                handleSelectedImage={handleSelectedImage}
-                showGallery={[showGallery, setShowGallery]}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
-        </>
-      )}
+      <div className="flex items-stretch justify-center flex-1 overflow-hidden stage">
+        {showLoadingModal ? (
+          <LoadingModal handleResetState={handleResetState} />
+        ) : (
+          <PointsModal />
+        )}
+        <SegmentDrawer
+          handleResetState={handleResetState}
+          handleResetInteraction={handleResetInteraction}
+          handleUndoInteraction={handleUndoInteraction}
+          handleRedoInteraction={handleRedoInteraction}
+          handleMagicErase={handleMagicErase}
+          handleCreateSticker={handleCreateSticker}
+          handleImage={handleImage}
+          userNegClickBool={[userNegClickBool, setUserNegClickBool]}
+          handleMultiMaskMode={handleMultiMaskMode}
+          showGallery={[showGallery, setShowGallery]}
+          hasClicked={hasClicked}
+          handleSelectedImage={handleSelectedImage}
+        />
+        <div className="relative flex flex-col items-center justify-center flex-1 overflow-hidden md:overflow-visible md:px-12 md:py-9">
+          <div className="absolute top-0 z-30 flex flex-col items-center justify-center w-full md:relative">
+            <ToolTip
+              isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
+              hasClicked={hasClicked}
+              annotations={annotations}
+              allText={[allText, setAllText]}
+            />
+          </div>
+          <div
+            className="relative flex-1 w-full mb-3 md:my-7"
+            ref={containerRef}
+          >
+            <Canvas
+              konvaRef={konvaRef}
+              annotations={annotations}
+              newAnnotation={newAnnotation}
+              scale={scale}
+              handleMouseUp={handleMouseUp}
+              handleMouseDown={handleMouseDown}
+              handleMouseMove={handleMouseMove}
+              handleMouseOut={handleMouseOut}
+              containerRef={containerRef}
+              hasClicked={hasClicked}
+              setCanvasScale={setCanvasScale}
+              isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
+              allText={[allText, setAllText]}
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 };
