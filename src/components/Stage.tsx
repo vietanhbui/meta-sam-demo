@@ -1,24 +1,14 @@
 import Konva from "konva";
-import React, {
-  Profiler,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import * as _ from "underscore";
 import Canvas from "./Canvas";
-import FeatureSummary from "./FeatureSummary";
 import {
   AnnotationProps,
   modelInputProps,
   StageProps,
 } from "./helpers/Interface";
 import AppContext from "./hooks/createContext";
-import ImagePicker from "./ImagePicker";
 import LoadingModal from "./LoadingModal";
-import MobileOptionNavBar from "./MobileOptionNavBar";
-import MobileSegmentDrawer from "./MobileSegmentDrawer";
 import PointsModal from "./PointsModal";
 import SegmentDrawer from "./SegmentDrawer";
 import ToolTip from "./ToolTip";
@@ -33,7 +23,6 @@ const Stage = ({
   hasClicked,
   setHasClicked,
   handleSelectedImage,
-  image,
   isStandalone,
   model,
 }: StageProps) => {
