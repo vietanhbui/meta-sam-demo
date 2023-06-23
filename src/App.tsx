@@ -90,15 +90,6 @@ const App = () => {
   >(null);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
 
-  // useEffect(() => {
-  //   // Preload images
-  //   for (const photo of photos) {
-  //     const img = new Image();
-  //     img.src = photo.src;
-  //   }
-  // }, []);
-
-  // console.log("WHY IS THIS NOT RUNNING?")
   useEffect(() => {
     const initModel = async () => {
       try {
@@ -436,19 +427,12 @@ const App = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // redirect after handleSelectedImage runs
-  //   if (image) navigate("/playground");
-  // }, [image]);
-
   const handleSegModelResults = ({ tensor }: { tensor: Tensor }) => {
-    // console.log("handleSegModelResults");
     setTensor(tensor);
     setIsLoading(false);
     setIsErasing(false);
     setShowLoadingModal(false);
     setEraserText({ isErase: false, isEmbedding: false });
-    // window.scrollTo(0, 0);
   };
 
   const handleAllModelResults = ({

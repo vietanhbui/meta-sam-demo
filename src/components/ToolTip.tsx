@@ -24,25 +24,9 @@ const ToolTip = ({
     isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
   } = useContext(AppContext)!;
 
-  // useEffect(() => {
-  //   return () => {
-  //     clearTimeout(timerRefOne.current);
-  //     clearTimeout(timerRefTwo.current);
-  //     clearTimeout(timerRefThree.current);
-  //   };
-  // }, []);
-
-  // const timerRefOne = useRef<any>(null);
-  // const timerRefTwo = useRef<any>(null);
-  // const timerRefThree = useRef<any>(null);
-
   const isMobile = window.innerWidth < 768;
   const getText = () => {
     if (isErasing) return null;
-    // if (eraserText.isErase)
-    //   return "Masks can be input into other open source models, like Erase.";
-    // if (eraserText.isEmbedding)
-    //   return "Re-extracting an embedding on the erased image.";
     if (isMultiMaskMode) {
       if (clicks?.length)
         return "Move your cursor on or off the image to expand or collapse the layers.";
