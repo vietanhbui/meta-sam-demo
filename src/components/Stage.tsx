@@ -32,7 +32,6 @@ const Stage = ({
     stickers: [stickers, setStickers],
     segmentTypes: [segmentTypes, setSegmentTypes],
     isErased: [isErased, setIsErased],
-    canvasHeight: [canvasHeight, setCanvasHeight],
     maskImg: [, setMaskImg],
     userNegClickBool: [userNegClickBool, setUserNegClickBool],
     activeSticker: [activeSticker, setActiveSticker],
@@ -46,7 +45,6 @@ const Stage = ({
     predMask: [predMask, setPredMask],
     predMasks: [predMasks, setPredMasks],
     predMasksHistory: [predMasksHistory, setPredMasksHistory],
-    isToolBarUpload: [isToolBarUpload, setIsToolBarUpload],
   } = useContext(AppContext)!;
   const [annotations, setAnnotations] = useState<Array<AnnotationProps>>([]);
   const [newAnnotation, setNewAnnotation] = useState<Array<AnnotationProps>>(
@@ -61,9 +59,6 @@ const Stage = ({
   const [shouldUpdateOnDrag, setShouldUpdateOnDrag] = useState<boolean>(true);
   const [points, setPoints] = useState<Points>();
   const [canvasScale, setCanvasScale] = useState<number>(1);
-  const [homepageTimer, setHomepageTimer] = useState<any>();
-  const [shouldShowHomepageOverlay, setShouldShowHomepageOverlay] =
-    useState(false);
   const DRAG_THRESHOLD = 4;
   const HOMEPAGE_IMAGE = "/assets/gallery/dogs-with-stick.jpg";
   const HOMEPAGE_TIME_LIMIT = 5000;
@@ -86,21 +81,6 @@ const Stage = ({
       handleResetState();
     };
   }, [isStandalone, model]);
-
-  useEffect(() => {
-    if (isStandalone && clicks && clicks?.length > 0) {
-      setHomepageTimer(
-        setTimeout(() => {
-          setShouldShowHomepageOverlay(true);
-        }, HOMEPAGE_TIME_LIMIT)
-      );
-    } else {
-      homepageTimer && clearTimeout(homepageTimer);
-    }
-    return () => {
-      homepageTimer && clearTimeout(homepageTimer);
-    };
-  }, [isStandalone, clicks]);
 
   const superDefer = (cb: Function) => {
     setTimeout(
@@ -207,18 +187,6 @@ const Stage = ({
     setStickers([...(newStickers || []), ...(stickers || [])]);
     handleResetInteraction();
     setIsLoading(false);
-  };
-
-  const handleMouseDown = (e: any) => {
-    if (stickerTabBool) return;
-    if (clicksHistory) setClicksHistory(null);
-    if (predMasksHistory) setPredMasksHistory(null);
-    if (segmentTypes !== "Box") return;
-    const { x, y } = e.target.getStage().getPointerPosition();
-    setNumOfDragEvents(0);
-    if (newAnnotation.length === 0) {
-      setNewAnnotation([{ x, y, width: 0, height: 0, clickType: -1 }]);
-    }
   };
 
   const handleMoveToMask = _.throttle((e: any, x: number, y: number) => {
@@ -626,7 +594,6 @@ const Stage = ({
               newAnnotation={newAnnotation}
               scale={scale}
               handleMouseUp={handleMouseUp}
-              handleMouseDown={handleMouseDown}
               handleMouseMove={handleMouseMove}
               handleMouseOut={handleMouseOut}
               containerRef={containerRef}

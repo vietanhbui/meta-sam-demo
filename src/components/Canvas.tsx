@@ -29,7 +29,6 @@ interface CanvasProps {
   konvaRef: React.RefObject<Konva.Stage> | null;
   handleMouseUp: (e: any, forceHasClicked?: boolean) => void;
   scale: modelScaleProps | null;
-  handleMouseDown: (e: any) => void;
   handleMouseMove: (e: any) => void;
   handleMouseOut: (e: any) => void;
   annotations: Array<AnnotationProps>;
@@ -46,7 +45,6 @@ const Canvas = ({
   konvaRef,
   handleMouseUp,
   scale,
-  handleMouseDown,
   handleMouseMove,
   handleMouseOut,
   annotations,
@@ -506,7 +504,6 @@ const Canvas = ({
             height={canvasDimensions.height}
             onMouseDown={(e) => {
               if (stickerTabBool) return;
-              handleMouseDown(e);
             }}
             onMouseUp={(e) => {
               if (stickerTabBool) {
@@ -523,7 +520,6 @@ const Canvas = ({
             onMouseLeave={handleMouseOut}
             onTouchStart={(e) => {
               if (stickerTabBool) return;
-              handleMouseDown(e);
               setNumOfTouches((prev) => {
                 return prev + 1;
               });
