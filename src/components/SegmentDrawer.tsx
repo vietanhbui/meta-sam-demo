@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { getCookieConsentValue } from "react-cookie-consent";
 import { useDropzone } from "react-dropzone";
 import * as ReactGA from "react-ga4";
-import Animate from "./hooks/Animation";
 import AppContext from "./hooks/createContext";
 import SegmentOptions from "./SegmentOptions";
 
@@ -155,20 +154,6 @@ const SegmentDrawer = ({
                 Hover & Click
               </span>
             </div>
-            {segmentTypes !== "Click" && visibleClickHover && (
-              <Animate isMounted={isClickMounted}>
-                <p className="my-3 text-[11px] opacity-70">
-                  Click an object one or more times. Shift-click to remove
-                  regions.
-                </p>
-              </Animate>
-            )}
-            {segmentTypes === "Click" && (
-              <p className={`my-3 text-[11px] text-blue-700 opacity-70`}>
-                Click an object one or more times. Shift-click to remove
-                regions.
-              </p>
-            )}
             <div className="flex justify-between mx-5 my-3">
               <div
                 onClick={() => setUserNegClickBool(false)}

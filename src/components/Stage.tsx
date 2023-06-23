@@ -9,7 +9,6 @@ import {
 } from "./helpers/Interface";
 import AppContext from "./hooks/createContext";
 import LoadingModal from "./LoadingModal";
-import PointsModal from "./PointsModal";
 import SegmentDrawer from "./SegmentDrawer";
 
 type Points = { sx: number; sy: number; x: number; y: number };
@@ -600,7 +599,7 @@ const Stage = ({
         {showLoadingModal ? (
           <LoadingModal handleResetState={handleResetState} />
         ) : (
-          <PointsModal />
+          <></>
         )}
         <SegmentDrawer
           handleResetState={handleResetState}
