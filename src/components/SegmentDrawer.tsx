@@ -5,7 +5,6 @@ import * as ReactGA from "react-ga4";
 import Animate from "./hooks/Animation";
 import AppContext from "./hooks/createContext";
 import SegmentOptions from "./SegmentOptions";
-import Sparkle from "./Sparkle";
 
 interface SegmentDrawerProps {
   handleResetState: () => void;
