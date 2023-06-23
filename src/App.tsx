@@ -4,7 +4,6 @@ import * as ort from "onnxruntime-web";
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./assets/scss/App.scss";
-import Footer from "./components/Footer";
 import getFile from "./components/helpers/getFile";
 import { handleImageScale } from "./components/helpers/ImageHelper";
 import { modelScaleProps } from "./components/helpers/Interface";
