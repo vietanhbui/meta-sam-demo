@@ -17,15 +17,10 @@ const SegmentOptions = ({
   handleResetInteraction,
   handleUndoInteraction,
   handleRedoInteraction,
-  handleCreateSticker,
-  handleMagicErase,
   handleImage,
-  hasClicked,
   isCutOut: [isCutOut, setIsCutOut],
-  handleMultiMaskMode,
 }: SegmentOptionsProps) => {
   const {
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
     segmentTypes: [segmentTypes, setSegmentTypes],
     isLoading: [isLoading, setIsLoading],
     isErased: [isErased, setIsErased],
@@ -34,9 +29,6 @@ const SegmentOptions = ({
     image: [image],
     isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
     svgs: [svgs, setSVGs],
-    clicks: [clicks, setClicks],
-    showLoadingModal: [showLoadingModal, setShowLoadingModal],
-    didShowAMGAnimation: [didShowAMGAnimation, setDidShowAMGAnimation],
   } = useContext(AppContext)!;
   return (
     <>

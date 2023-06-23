@@ -28,7 +28,6 @@ interface SegmentDrawerProps {
 }
 
 const SegmentDrawer = ({
-  handleResetState,
   handleResetInteraction,
   handleUndoInteraction,
   handleRedoInteraction,
@@ -42,46 +41,16 @@ const SegmentDrawer = ({
   handleSelectedImage,
 }: SegmentDrawerProps) => {
   const {
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
     segmentTypes: [segmentTypes, setSegmentTypes],
-    isLoading: [isLoading, setIsLoading],
-    isErased: [isErased, setIsErased],
-    isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
-    stickers: [stickers, setStickers],
-    activeSticker: [activeSticker, setActiveSticker],
     didShowAMGAnimation: [didShowAMGAnimation, setDidShowAMGAnimation],
-    isAllAnimationDone: [isAllAnimationDone, setIsAllAnimationDone],
     isToolBarUpload: [isToolBarUpload, setIsToolBarUpload],
   } = useContext(AppContext)!;
 
-  const [uploadClick, setUploadClick] = useState<boolean>(true);
   const [visibleClickHover, setVisibleClickHover] = useState<boolean>(false);
-  const [visibleBoxHover, setVisibleBoxHover] = useState<boolean>(false);
-  const [visibleAllHover, setVisibleAllHover] = useState<boolean>(false);
-  const [visibleStickerHover, setVisibleStickerHover] =
-    useState<boolean>(false);
   const [isCutOut, setIsCutOut] = useState<boolean>(false);
-  const handleStickerClick = (i: number) => {
-    setActiveSticker(i);
-  };
-  const [error, setError] = useState<string>("");
   const [isClickCollapsed, setIsClickCollapsed] = useState(true);
-  const [isBoxCollapsed, setIsBoxCollapsed] = useState(true);
-  const [isAllCollapsed, setIsAllCollapsed] = useState(true);
-  const [isCutOutCollapsed, setIsCutOutCollapsed] = useState(true);
   const [isClickMounted, setIsClickMounted] = useState(false);
-  const [isBoxMounted, setIsBoxMounted] = useState(false);
-  const [isAllMounted, setIsAllMounted] = useState(false);
-  const [isCutOutMounted, setIsCutOutMounted] = useState(false);
-  let clickTimeout: string | number | NodeJS.Timeout | undefined,
-    boxTimeout: string | number | NodeJS.Timeout | undefined,
-    allTimeout: string | number | NodeJS.Timeout | undefined,
-    cutOutTimeout: string | number | NodeJS.Timeout | undefined;
-
-  // setIsClickMounted(false)
-  // setIsBoxMounted(false)
-  // setIsAllMounted(false)
-  // setIsCutOutMounted(false)
+  let clickTimeout: string | number | NodeJS.Timeout | undefined;
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -90,14 +59,6 @@ const SegmentDrawer = ({
     },
     onDrop: (acceptedFile) => {
       try {
-        if (acceptedFile.length === 0) {
-          setError("File not accepted! Try again.");
-          return;
-        }
-        if (acceptedFile.length > 1) {
-          setError("Too many files! Try again with 1 file.");
-          return;
-        }
         const reader = new FileReader();
         reader.onloadend = () => {
           handleSelectedImage(acceptedFile[0]);
@@ -119,7 +80,7 @@ const SegmentDrawer = ({
           <div className="flex justify-between p-2 pb-3">
             <span className="leading-3">Tools</span>
           </div>
-          {uploadClick && (
+          {
             <div className="flex justify-between px-3 py-2 mb-3 cursor-pointer rounded-xl outline outline-gray-200">
               <button
                 className="flex"
@@ -136,7 +97,7 @@ const SegmentDrawer = ({
                 </span>
               </button>
             </div>
-          )}
+          }
           <div
             onClick={() => {
               segmentTypes !== "Click" && handleResetInteraction();
@@ -168,15 +129,8 @@ const SegmentDrawer = ({
             }}
             onMouseLeave={() => {
               setIsClickCollapsed(true);
-              setIsBoxCollapsed(true);
-              setIsAllCollapsed(true);
-              setIsCutOutCollapsed(true);
-              // setVisibleClickHover(false);
               clearTimeout(clickTimeout);
               setIsClickMounted(false);
-              setIsBoxMounted(false);
-              setIsAllMounted(false);
-              setIsCutOutMounted(false);
             }}
           >
             <div className="flex">

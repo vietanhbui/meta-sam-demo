@@ -9,9 +9,7 @@ import { handleImageScale } from "./components/helpers/ImageHelper";
 import { modelScaleProps } from "./components/helpers/Interface";
 import {
   getAllMasks,
-  getBestPredMask,
   keepArrayForMultiMask,
-  rleFrString,
   rleToImage,
   traceCompressedRLeStringToSVG,
   traceOnnxMaskToSVG,
